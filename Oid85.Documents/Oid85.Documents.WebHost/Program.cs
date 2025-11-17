@@ -29,7 +29,7 @@ namespace Oid85.Documents.WebHost
 
             builder.Services.AddWindowsService(options =>
             {
-                options.ServiceName = "Oid85.Athletic";
+                options.ServiceName = "Oid85.Documents";
             });
 
             bool applyMigrations = builder.Configuration.GetValue<bool>(KnownSettingsKeys.PostgresApplyMigrationsOnStart);
