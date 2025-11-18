@@ -24,10 +24,8 @@ public class FilesController(
     [ProducesResponseType(typeof(BaseResponse<CreateDocumentFileResponse>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(BaseResponse<CreateDocumentFileResponse>), StatusCodes.Status500InternalServerError)]
     public Task<IActionResult> CreateFileAsync(
-        IFormFile file, Guid documentId)
-    {
-        return GetResponseAsync(
+        IFormFile file, Guid documentId) => 
+        GetResponseAsync(
             () => fileService.CreateDocumentFileAsync(file, documentId),
             result => new BaseResponse<CreateDocumentFileResponse> { Result = result });
-    }
 }
