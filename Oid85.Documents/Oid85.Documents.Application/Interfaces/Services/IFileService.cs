@@ -1,4 +1,5 @@
-﻿using Oid85.Documents.Core.Requests;
+﻿using Microsoft.AspNetCore.Http;
+using Oid85.Documents.Core.Requests;
 using Oid85.Documents.Core.Responses;
 
 namespace Oid85.Documents.Application.Interfaces.Services
@@ -8,6 +9,6 @@ namespace Oid85.Documents.Application.Interfaces.Services
     /// </summary>
     public interface IFileService
     {
-        Task<CreateDocumentFileResponse?> CreateDocumentFileAsync(CreateDocumentFileRequest request);
+        Task<CreateDocumentFileResponse?> CreateDocumentFileAsync(IFormFile file, Guid documentId);
     }
 }

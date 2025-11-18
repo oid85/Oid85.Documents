@@ -19,13 +19,15 @@ public class FilesController(
     /// <summary>
     /// Добавить файл
     /// </summary>
-    [HttpPost("create")]
+    [HttpPost("create/{documentId}")]
     [ProducesResponseType(typeof(BaseResponse<CreateDocumentFileResponse>), StatusCodes.Status200OK)]
     [ProducesResponseType(typeof(BaseResponse<CreateDocumentFileResponse>), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(BaseResponse<CreateDocumentFileResponse>), StatusCodes.Status500InternalServerError)]
     public Task<IActionResult> CreateFileAsync(
-        [FromBody] CreateDocumentFileRequest request) =>
-        GetResponseAsync(
-            () => fileService.CreateDocumentFileAsync(request),
+        IFormFile file, Guid documentId)
+    {
+        return GetResponseAsync(
+            () => fileService.CreateDocumentFileAsync(file, documentId),
             result => new BaseResponse<CreateDocumentFileResponse> { Result = result });
+    }
 }
