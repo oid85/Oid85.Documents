@@ -1,9 +1,9 @@
 ﻿namespace Oid85.Documents.Core.Responses
 {
     /// <summary>
-    /// ответ на запрос создания документа
+    /// ответ на запрос создания категории документа
     /// </summary>
-    public class CreateDocumentResponse
+    public class CreateDocumentCategoryResponse
     {
         /// <summary>
         /// Идентификатор

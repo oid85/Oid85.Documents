@@ -14,7 +14,7 @@ namespace Oid85.Documents.WebHost.Controller;
 [ApiController]
 public class DocumentsController(
     IDocumentService documentService)
-    : DocumentsBaseController
+    : BaseController
 {
     /// <summary>
     /// Добавить документ

@@ -4,10 +4,10 @@ using Oid85.Documents.Core.Responses;
 namespace Oid85.Documents.Application.Interfaces.Services
 {
     /// <summary>
-    /// Сервис документов
+    /// Сервис файлов
     /// </summary>
-    public interface IDocumentService
+    public interface IFileService
     {
-        Task<CreateDocumentResponse?> CreateDocumentAsync(CreateDocumentRequest request);
+        Task<CreateDocumentFileResponse?> CreateDocumentFileAsync(CreateDocumentFileRequest request);
     }
 }

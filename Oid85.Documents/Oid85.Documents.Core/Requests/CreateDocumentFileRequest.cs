@@ -1,21 +1,24 @@
-﻿using Oid85.Documents.Core.Models.Base;
-
-namespace Oid85.Documents.Core.Models
+﻿namespace Oid85.Documents.Core.Requests
 {
     /// <summary>
-    /// Файл документа
+    /// Запрос на создание файла документа
     /// </summary>
-    public class DocumentFile : AuditableModel
+    public class CreateDocumentFileRequest
     {
+        /// <summary>
+        /// Идентификатор документа
+        /// </summary>
+        public Guid DocumentId { get; set; }
+
         /// <summary>
         /// Наименование
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
         /// <summary>
         /// Тип
         /// </summary>
-        public string ContentType { get; set; } = string.Empty;
+        public string ContentType { get; set; }
 
         /// <summary>
         /// Размер файла
@@ -26,10 +29,5 @@ namespace Oid85.Documents.Core.Models
         /// Содержимое файла
         /// </summary>        
         public byte[] Content { get; set; }
-
-        /// <summary>
-        /// Документ
-        /// </summary>
-        public Document Document { get; set; }
     }
 }

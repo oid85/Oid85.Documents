@@ -32,6 +32,8 @@ public static class ServiceCollectionExtensions
                 .EnableServiceProviderCaching(false), poolSize: 32);
 
         services.AddTransient<IDocumentRepository, DocumentRepository>();
+        services.AddTransient<ICategoryRepository, CategoryRepository>();
+        services.AddTransient<IFileRepository, FileRepository>();
     }
 
     public static async Task ApplyMigrations(this IHost host)

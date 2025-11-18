@@ -10,5 +10,7 @@ public static class ServiceCollectionExtensions
         this IServiceCollection services)
     {
         services.AddTransient<IDocumentService, DocumentService>();
+        services.AddTransient<ICategoryService, CategoryService>();
+        services.AddTransient<IFileService, FileService>();
     }
 }

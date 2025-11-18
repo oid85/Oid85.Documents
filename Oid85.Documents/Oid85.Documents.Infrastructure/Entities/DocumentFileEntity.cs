@@ -28,7 +28,7 @@ namespace Oid85.Documents.Infrastructure.Entities
         /// <summary>
         /// Содержимое файла
         /// </summary>        
-        public byte[]? Content { get; set; }
+        public byte[] Content { get; set; }
 
         /// <summary>
         /// Документ

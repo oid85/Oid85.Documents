@@ -5,7 +5,7 @@ using Oid85.Documents.Core.Exceptions;
 namespace Oid85.Documents.WebHost.Controller.Base;
 
 [ApiController]
-public abstract class DocumentsBaseController : ControllerBase
+public abstract class BaseController : ControllerBase
 {
     [ApiExplorerSettings(IgnoreApi = true)]
     protected async Task<IActionResult> GetResponseAsync<TData, TResult>(Func<Task> mainLogic) =>
