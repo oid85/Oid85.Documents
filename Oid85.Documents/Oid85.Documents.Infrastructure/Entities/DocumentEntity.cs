@@ -63,7 +63,7 @@ namespace Oid85.Documents.Infrastructure.Entities
         /// <summary>
         /// Флаг актуальности документа
         /// </summary>
-        public bool IsActual { get; set; } = true;
+        public bool? IsActual { get; set; }
 
         /// <summary>
         /// Категория документа

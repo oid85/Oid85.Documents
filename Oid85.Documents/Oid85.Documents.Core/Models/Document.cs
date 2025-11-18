@@ -55,7 +55,7 @@ namespace Oid85.Documents.Core.Models
         /// <summary>
         /// Флаг актуальности документа
         /// </summary>
-        public bool IsActual { get; set; } = true;
+        public bool? IsActual { get; set; } = true;
 
         /// <summary>
         /// Категория документа
