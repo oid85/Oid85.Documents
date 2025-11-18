@@ -17,6 +17,19 @@ public class CategoriesController(
     : BaseController
 {
     /// <summary>
+    /// Получить список категорий
+    /// </summary>
+    [HttpPost("list")]
+    [ProducesResponseType(typeof(BaseResponse<GetDocumentCategoryListResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<GetDocumentCategoryListResponse>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(BaseResponse<GetDocumentCategoryListResponse>), StatusCodes.Status500InternalServerError)]
+    public Task<IActionResult> GetDocumentCategoryListAsync(
+        [FromBody] GetDocumentCategoryListRequest request) =>
+        GetResponseAsync(
+            () => categoryService.GetDocumentCategoryListAsync(request),
+            result => new BaseResponse<GetDocumentCategoryListResponse> { Result = result });
+
+    /// <summary>
     /// Добавить категорию
     /// </summary>
     [HttpPost("create")]

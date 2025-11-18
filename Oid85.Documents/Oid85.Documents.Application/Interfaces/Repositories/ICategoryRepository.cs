@@ -8,8 +8,13 @@ namespace Oid85.Documents.Application.Interfaces.Repositories
     public interface ICategoryRepository
     {
         /// <summary>
-        /// Создать документ
+        /// Создать категорию
         /// </summary>
         Task<Guid?> CreateDocumentCategoryAsync(DocumentCategory model);
+
+        /// <summary>
+        /// Получить список категорий
+        /// </summary>
+        Task<List<DocumentCategory>?> GetDocumentCategoryListAsync();
     }
 }

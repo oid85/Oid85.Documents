@@ -1,7 +1,7 @@
 ﻿namespace Oid85.Documents.Core.Responses
 {
     /// <summary>
-    /// ответ на запрос создания категории документа
+    /// Ответ на запрос создания категории документа
     /// </summary>
     public class CreateDocumentCategoryResponse
     {

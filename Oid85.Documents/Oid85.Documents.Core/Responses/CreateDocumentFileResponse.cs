@@ -1,7 +1,7 @@
 ﻿namespace Oid85.Documents.Core.Responses
 {
     /// <summary>
-    /// ответ на запрос создания файла документа
+    /// Ответ на запрос создания файла документа
     /// </summary>
     public class CreateDocumentFileResponse
     {
