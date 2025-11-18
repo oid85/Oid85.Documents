@@ -5,7 +5,6 @@ namespace Oid85.Documents.Infrastructure.Entities.Base;
 
 public class BaseEntity
 {
-    [Column("id")]
     [Key]
     public Guid Id { get; set; }
 }
