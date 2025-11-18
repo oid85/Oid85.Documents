@@ -39,5 +39,44 @@ namespace Oid85.Documents.Infrastructure.Repositories
 
             return entity.Id;
         }
+
+        /// <inheritdoc />
+        public async Task<List<Document>?> GetDocumentListAsync(Guid documentCategoryId)
+        {
+            await using var context = await contextFactory.CreateDbContextAsync();
+
+            var entities = await context.DocumentEntities
+                .Include(x => x.Category)
+                .Where(x => !x.IsDeleted)
+                .Where(x => x.Category.Id == documentCategoryId)
+                .ToListAsync();
+
+            if (entities is null)
+                return null;
+
+            var models = entities
+                .Select(x =>
+                new Document
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Fio = x.Fio,
+                    Series = x.Series,
+                    Number = x.Number,
+                    Issue = x.Issue,
+                    Date = x.Date,
+                    StartDate = x.StartDate,
+                    EndDate = x.EndDate,
+                    Sum = x.Sum,
+                    IsActual = x.IsActual,
+                    CreatedAt = x.CreatedAt,
+                    UpdatedAt = x.UpdatedAt,
+                    DeletedAt = x.DeletedAt,
+                    IsDeleted = x.IsDeleted                    
+                })
+                .ToList();
+
+            return models;
+        }
     }
 }

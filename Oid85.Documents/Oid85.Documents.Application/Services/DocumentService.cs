@@ -39,5 +39,27 @@ namespace Oid85.Documents.Application.Services
 
             return response;
         }
+
+        /// <inheritdoc />
+        public async Task<GetDocumentListResponse?> GetDocumentListAsync(GetDocumentListRequest request)
+        {
+            var models = await documentRepository.GetDocumentListAsync(request.DocumentCategoryId);
+
+            if (models is null)
+                return null;
+
+            var response = new GetDocumentListResponse
+            {
+                Documents = models
+                .Select(x => new GetDocumentListItemResponse
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                })
+                .ToList()
+            };
+
+            return response;
+        }
     }
 }

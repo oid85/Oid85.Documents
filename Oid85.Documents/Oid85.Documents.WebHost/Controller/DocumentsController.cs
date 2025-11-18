@@ -17,6 +17,19 @@ public class DocumentsController(
     : BaseController
 {
     /// <summary>
+    /// Получить список документов
+    /// </summary>
+    [HttpPost("list")]
+    [ProducesResponseType(typeof(BaseResponse<GetDocumentListResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<GetDocumentListResponse>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(BaseResponse<GetDocumentListResponse>), StatusCodes.Status500InternalServerError)]
+    public Task<IActionResult> GetDocumentListAsync(
+        [FromBody] GetDocumentListRequest request) =>
+        GetResponseAsync(
+            () => documentService.GetDocumentListAsync(request),
+            result => new BaseResponse<GetDocumentListResponse> { Result = result });
+
+    /// <summary>
     /// Добавить документ
     /// </summary>
     [HttpPost("create")]

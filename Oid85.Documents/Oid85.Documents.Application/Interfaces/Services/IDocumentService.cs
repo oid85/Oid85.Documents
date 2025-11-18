@@ -8,6 +8,14 @@ namespace Oid85.Documents.Application.Interfaces.Services
     /// </summary>
     public interface IDocumentService
     {
+        /// <summary>
+        /// Создать документ
+        /// </summary>
         Task<CreateDocumentResponse?> CreateDocumentAsync(CreateDocumentRequest request);
+
+        /// <summary>
+        /// Получить список документов
+        /// </summary>
+        Task<GetDocumentListResponse?> GetDocumentListAsync(GetDocumentListRequest request);
     }
 }

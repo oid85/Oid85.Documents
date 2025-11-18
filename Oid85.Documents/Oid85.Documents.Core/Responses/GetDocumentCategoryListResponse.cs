@@ -1,8 +1,5 @@
 ﻿namespace Oid85.Documents.Core.Responses
 {
-    /// <summary>
-    /// Ответ на запрос создания категории документа
-    /// </summary>
     public class GetDocumentCategoryListResponse
     {
         public List<GetDocumentCategoryListItemResponse> DocumentCategories { get; set; }

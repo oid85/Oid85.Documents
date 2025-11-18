@@ -11,5 +11,10 @@ namespace Oid85.Documents.Application.Interfaces.Repositories
         /// Создать документ
         /// </summary>
         Task<Guid?> CreateDocumentAsync(Document model, Guid documentCategoryId);
+
+        /// <summary>
+        /// Получить список документов
+        /// </summary>
+        Task<List<Document>?> GetDocumentListAsync(Guid documentCategoryId);
     }
 }

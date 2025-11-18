@@ -68,7 +68,7 @@ namespace Oid85.Documents.Infrastructure.Entities
         /// <summary>
         /// Категория документа
         /// </summary>
-        public DocumentCategoryEntity? Category { get; set; }
+        public DocumentCategoryEntity Category { get; set; }
 
         /// <summary>
         /// Список файлов
