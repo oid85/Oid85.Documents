@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Oid85.Documents.Application.Interfaces.Repositories;
 using Oid85.Documents.Common.KnownConstants;
+using Oid85.Documents.Infrastructure.Interceptors;
 using Oid85.Documents.Infrastructure.Repositories;
 
 namespace Oid85.Documents.Infrastructure.Extensions;
@@ -13,10 +14,16 @@ public static class ServiceCollectionExtensions
     public static void ConfigureInfrastructure(
         this IServiceCollection services,
         IConfiguration configuration)
-    {    
+    {
+        services.AddSingleton<UpdateAuditableEntitiesInterceptor>();
+
         services.AddDbContextPool<DocumentsContext>((serviceProvider, options) =>
-        {  
-            options.UseNpgsql(configuration.GetValue<string>(KnownSettingsKeys.PostgresDocumentsConnectionString)!);
+        {
+            var updateInterceptor = serviceProvider.GetRequiredService<UpdateAuditableEntitiesInterceptor>();
+
+            options
+                .UseNpgsql(configuration.GetValue<string>(KnownSettingsKeys.PostgresDocumentsConnectionString)!)
+                .AddInterceptors(updateInterceptor);
         });
 
         services.AddPooledDbContextFactory<DocumentsContext>(options =>

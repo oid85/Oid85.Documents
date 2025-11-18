@@ -8,6 +8,8 @@ namespace Oid85.Documents.Infrastructure;
 public class DocumentsContext(DbContextOptions<DocumentsContext> options) : DbContext(options)
 {
     public DbSet<DocumentEntity> DocumentEntities { get; set; }
+    public DbSet<DocumentCategoryEntity> DocumentCategoryEntities { get; set; }
+    public DbSet<DocumentFileEntity> DocumentFileEntities { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

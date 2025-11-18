@@ -30,4 +30,7 @@
 	  <ProjectReference Include="..\Oid85.Documents.Application\Oid85.Documents.Application.csproj" />
 	  <ProjectReference Include="..\Oid85.Documents.Common\Oid85.Documents.Common.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Interceptors\" />
+	</ItemGroup>
 </Project>
