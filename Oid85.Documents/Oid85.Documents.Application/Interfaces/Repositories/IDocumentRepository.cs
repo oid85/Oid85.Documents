@@ -16,5 +16,10 @@ namespace Oid85.Documents.Application.Interfaces.Repositories
         /// Получить список документов
         /// </summary>
         Task<List<Document>?> GetDocumentListAsync(Guid documentCategoryId);
+
+        /// <summary>
+        /// Установить для документа режим загрузки файлов
+        /// </summary>
+        Task<Guid?> SetDocumentUploadModeAsync(Guid documentId);
     }
 }

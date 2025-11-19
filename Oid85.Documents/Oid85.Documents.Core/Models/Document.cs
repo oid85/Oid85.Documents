@@ -58,6 +58,11 @@ namespace Oid85.Documents.Core.Models
         public bool? IsActual { get; set; } = true;
 
         /// <summary>
+        /// Режим документа (хранение/загрузка)
+        /// </summary>
+        public string? Mode { get; set; }
+
+        /// <summary>
         /// Категория документа
         /// </summary>
         public DocumentCategory? Category { get; set; }

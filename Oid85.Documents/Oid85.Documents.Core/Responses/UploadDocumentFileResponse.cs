@@ -1,9 +1,9 @@
 ﻿namespace Oid85.Documents.Core.Responses
 {
     /// <summary>
-    /// Ответ на запрос создания файла документа
+    /// Загрузка файла в документ
     /// </summary>
-    public class CreateDocumentFileResponse
+    public class UploadDocumentFileResponse
     {
         /// <summary>
         /// Идентификатор

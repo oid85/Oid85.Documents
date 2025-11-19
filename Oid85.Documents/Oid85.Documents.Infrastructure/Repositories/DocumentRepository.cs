@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Oid85.Documents.Application.Interfaces.Repositories;
+using Oid85.Documents.Common.KnownConstants;
 using Oid85.Documents.Core.Models;
 using Oid85.Documents.Infrastructure.Entities;
 
@@ -7,8 +8,8 @@ namespace Oid85.Documents.Infrastructure.Repositories
 {
     /// <inheritdoc />
     public class DocumentRepository(
-        IDbContextFactory<DocumentsContext> contextFactory
-        ) : IDocumentRepository
+        IDbContextFactory<DocumentsContext> contextFactory) 
+        : IDocumentRepository
     {
         /// <inheritdoc />
         public async Task<Guid?> CreateDocumentAsync(Document model, Guid documentCategoryId)
@@ -31,6 +32,7 @@ namespace Oid85.Documents.Infrastructure.Repositories
                 EndDate = model.EndDate,
                 Sum = model.Sum,
                 IsActual = model.IsActual,
+                Mode = model.Mode,
                 Category = documentCategoryEntity
             };
 
@@ -69,6 +71,7 @@ namespace Oid85.Documents.Infrastructure.Repositories
                     EndDate = x.EndDate,
                     Sum = x.Sum,
                     IsActual = x.IsActual,
+                    Mode = x.Mode,
                     CreatedAt = x.CreatedAt,
                     UpdatedAt = x.UpdatedAt,
                     DeletedAt = x.DeletedAt,
@@ -77,6 +80,26 @@ namespace Oid85.Documents.Infrastructure.Repositories
                 .ToList();
 
             return models;
+        }
+
+        /// <inheritdoc />
+        public async Task<Guid?> SetDocumentUploadModeAsync(Guid documentId)
+        {
+            await using var context = await contextFactory.CreateDbContextAsync();
+
+            await context.DocumentEntities
+                .Where(x => x.Mode != KnownDocumentModes.Store)
+                .ExecuteUpdateAsync(x => x
+                        .SetProperty(entity => entity.Mode, KnownDocumentModes.Store));
+
+            await context.DocumentEntities
+                .Where(x => x.Id == documentId)
+                .ExecuteUpdateAsync(x => x
+                        .SetProperty(entity => entity.Mode, KnownDocumentModes.Upload));
+
+            await context.SaveChangesAsync();
+
+            return documentId;
         }
     }
 }

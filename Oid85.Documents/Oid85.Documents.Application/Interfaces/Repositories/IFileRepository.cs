@@ -8,8 +8,8 @@ namespace Oid85.Documents.Application.Interfaces.Repositories
     public interface IFileRepository
     {
         /// <summary>
-        /// Создать документ
+        /// Загрузить файл документа
         /// </summary>
-        Task<Guid?> CreateDocumentFileAsync(DocumentFile model, Guid documentId);
+        Task<Guid?> UploadDocumentFileAsync(DocumentFile model);
     }
 }

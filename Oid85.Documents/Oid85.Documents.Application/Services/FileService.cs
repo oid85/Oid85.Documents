@@ -12,7 +12,7 @@ namespace Oid85.Documents.Application.Services
         IFileRepository fileRepository) : IFileService
     {
         /// <inheritdoc />
-        public async Task<CreateDocumentFileResponse?> CreateDocumentFileAsync(IFormFile file, Guid documentId)
+        public async Task<UploadDocumentFileResponse?> UploadDocumentFileAsync(IFormFile file)
         {
             using var ms = new MemoryStream();
             await file.CopyToAsync(ms);
@@ -23,15 +23,15 @@ namespace Oid85.Documents.Application.Services
                 Name = file.FileName,
                 ContentType = file.ContentType,
                 Size = file.Length,
-                Content = bytes
+                Content = bytes                
             };
 
-            var id = await fileRepository.CreateDocumentFileAsync(model, documentId);
+            var id = await fileRepository.UploadDocumentFileAsync(model);
 
             if (id is null)
                 return null;
 
-            var response = new CreateDocumentFileResponse
+            var response = new UploadDocumentFileResponse
             {
                 Id = id.Value
             };

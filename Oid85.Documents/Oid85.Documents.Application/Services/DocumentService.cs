@@ -1,5 +1,7 @@
-﻿using Oid85.Documents.Application.Interfaces.Repositories;
+﻿using System.Reflection;
+using Oid85.Documents.Application.Interfaces.Repositories;
 using Oid85.Documents.Application.Interfaces.Services;
+using Oid85.Documents.Common.KnownConstants;
 using Oid85.Documents.Core.Models;
 using Oid85.Documents.Core.Requests;
 using Oid85.Documents.Core.Responses;
@@ -24,7 +26,8 @@ namespace Oid85.Documents.Application.Services
                 StartDate = request.StartDate,
                 EndDate = request.EndDate,
                 Sum = request.Sum,
-                IsActual = request.IsActual
+                IsActual = true,
+                Mode = KnownDocumentModes.Store
             };
 
             var id = await documentRepository.CreateDocumentAsync(model, request.DocumentCategoryId);
@@ -57,6 +60,22 @@ namespace Oid85.Documents.Application.Services
                     Name = x.Name
                 })
                 .ToList()
+            };
+
+            return response;
+        }
+
+        /// <inheritdoc />
+        public async Task<SetDocumentUploadModeResponse?> SetDocumentUploadModeAsync(SetDocumentUploadModeRequest request)
+        {
+            var id = await documentRepository.SetDocumentUploadModeAsync(request.Id);
+
+            if (id is null)
+                return null;
+
+            var response = new SetDocumentUploadModeResponse
+            {
+                Id = id.Value
             };
 
             return response;

@@ -17,5 +17,10 @@ namespace Oid85.Documents.Application.Interfaces.Services
         /// Получить список документов
         /// </summary>
         Task<GetDocumentListResponse?> GetDocumentListAsync(GetDocumentListRequest request);
+
+        /// <summary>
+        /// Установить для документа режим загрузки файлов
+        /// </summary>
+        Task<SetDocumentUploadModeResponse?> SetDocumentUploadModeAsync(SetDocumentUploadModeRequest request);
     }
 }

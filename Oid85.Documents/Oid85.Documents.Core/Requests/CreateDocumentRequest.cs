@@ -54,10 +54,5 @@
         /// Сумма документа
         /// </summary>
         public decimal? Sum { get; set; }
-
-        /// <summary>
-        /// Флаг актуальности документа
-        /// </summary>
-        public bool? IsActual { get; set; }
     }
 }

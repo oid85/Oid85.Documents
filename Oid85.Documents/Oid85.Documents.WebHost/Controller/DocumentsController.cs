@@ -41,4 +41,17 @@ public class DocumentsController(
         GetResponseAsync(
             () => documentService.CreateDocumentAsync(request),
             result => new BaseResponse<CreateDocumentResponse> { Result = result });
+
+    /// <summary>
+    /// Перевести документ в режим загрузки файлов
+    /// </summary>
+    [HttpPost("set-upload-mode")]
+    [ProducesResponseType(typeof(BaseResponse<SetDocumentUploadModeResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<SetDocumentUploadModeResponse>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(BaseResponse<SetDocumentUploadModeResponse>), StatusCodes.Status500InternalServerError)]
+    public Task<IActionResult> SetDocumentUploadModeAsync(
+        [FromBody] SetDocumentUploadModeRequest request) =>
+        GetResponseAsync(
+            () => documentService.SetDocumentUploadModeAsync(request),
+            result => new BaseResponse<SetDocumentUploadModeResponse> { Result = result });
 }

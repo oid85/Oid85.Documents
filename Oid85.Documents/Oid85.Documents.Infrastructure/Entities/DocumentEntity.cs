@@ -66,6 +66,11 @@ namespace Oid85.Documents.Infrastructure.Entities
         public bool? IsActual { get; set; }
 
         /// <summary>
+        /// Режим документа (хранение/загрузка)
+        /// </summary>
+        public string? Mode { get; set; }
+
+        /// <summary>
         /// Категория документа
         /// </summary>
         public DocumentCategoryEntity Category { get; set; }

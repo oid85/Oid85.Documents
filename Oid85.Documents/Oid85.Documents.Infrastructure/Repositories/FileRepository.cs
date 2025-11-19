@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Oid85.Documents.Application.Interfaces.Repositories;
+using Oid85.Documents.Common.KnownConstants;
 using Oid85.Documents.Core.Models;
 using Oid85.Documents.Infrastructure.Entities;
 
@@ -11,11 +12,11 @@ namespace Oid85.Documents.Infrastructure.Repositories
         ) : IFileRepository
     {
         /// <inheritdoc />
-        public async Task<Guid?> CreateDocumentFileAsync(DocumentFile model, Guid documentId)
+        public async Task<Guid?> UploadDocumentFileAsync(DocumentFile model)
         {
             await using var context = await contextFactory.CreateDbContextAsync();
 
-            var documentEntity = await context.DocumentEntities.FirstOrDefaultAsync(x => x.Id == documentId);
+            var documentEntity = await context.DocumentEntities.FirstOrDefaultAsync(x => x.Mode == KnownDocumentModes.Upload);
             if (documentEntity is null) return null;
 
             var entity = new DocumentFileEntity
@@ -29,6 +30,9 @@ namespace Oid85.Documents.Infrastructure.Repositories
             };
 
             await context.AddAsync(entity);
+
+            documentEntity.Mode = KnownDocumentModes.Store;
+            
             await context.SaveChangesAsync();
 
             return entity.Id;

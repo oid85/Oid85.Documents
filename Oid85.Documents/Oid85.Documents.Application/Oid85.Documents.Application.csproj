@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Oid85.Documents.Common\Oid85.Documents.Common.csproj" />
     <ProjectReference Include="..\Oid85.Documents.Core\Oid85.Documents.Core.csproj" />
   </ItemGroup>
 
