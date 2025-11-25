@@ -1,4 +1,5 @@
-﻿using Oid85.Documents.Application.Interfaces.Repositories;
+﻿using System.Reflection;
+using Oid85.Documents.Application.Interfaces.Repositories;
 using Oid85.Documents.Application.Interfaces.Services;
 using Oid85.Documents.Core.Models;
 using Oid85.Documents.Core.Requests;
@@ -7,8 +8,8 @@ using Oid85.Documents.Core.Responses;
 namespace Oid85.Documents.Application.Services
 {
     /// <inheritdoc />
-    internal class CategoryService(
-        ICategoryRepository categoryRepository) : ICategoryService
+    internal class DocumentCategoryService(
+        IDocumentCategoryRepository categoryRepository) : IDocumentCategoryService
     {
         /// <inheritdoc />
         public async Task<CreateDocumentCategoryResponse?> CreateDocumentCategoryAsync(CreateDocumentCategoryRequest request)
@@ -24,6 +25,44 @@ namespace Oid85.Documents.Application.Services
                 return null;
 
             var response = new CreateDocumentCategoryResponse
+            {
+                Id = id.Value
+            };
+
+            return response;
+        }
+
+        /// <inheritdoc />
+        public async Task<DeleteDocumentCategoryResponse?> DeleteDocumentCategoryAsync(DeleteDocumentCategoryRequest request)
+        {
+            var id = await categoryRepository.DeleteDocumentCategoryAsync(request.Id);
+
+            if (id is null)
+                return null;
+
+            var response = new DeleteDocumentCategoryResponse
+            {
+                Id = id.Value
+            };
+
+            return response;
+        }
+
+        /// <inheritdoc />
+        public async Task<EditDocumentCategoryResponse?> EditDocumentCategoryAsync(EditDocumentCategoryRequest request)
+        {
+            var model = new DocumentCategory
+            {
+                Id = request.Id,
+                Name = request.Name
+            };
+
+            var id = await categoryRepository.EditDocumentCategoryAsync(model);
+
+            if (id is null)
+                return null;
+
+            var response = new EditDocumentCategoryResponse
             {
                 Id = id.Value
             };

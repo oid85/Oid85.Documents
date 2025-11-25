@@ -10,10 +10,10 @@ namespace Oid85.Documents.WebHost.Controller;
 /// <summary>
 /// Категории
 /// </summary>
-[Route("api/categories")]
+[Route("api/document-categories")]
 [ApiController]
-public class CategoriesController(
-    ICategoryService categoryService)
+public class DocumentCategoriesController(
+    IDocumentCategoryService categoryService)
     : BaseController
 {
     /// <summary>
@@ -41,4 +41,30 @@ public class CategoriesController(
         GetResponseAsync(
             () => categoryService.CreateDocumentCategoryAsync(request),
             result => new BaseResponse<CreateDocumentCategoryResponse> { Result = result });
+
+    /// <summary>
+    /// Редактировать категорию
+    /// </summary>
+    [HttpPost("edit")]
+    [ProducesResponseType(typeof(BaseResponse<EditDocumentCategoryResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<EditDocumentCategoryResponse>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(BaseResponse<EditDocumentCategoryResponse>), StatusCodes.Status500InternalServerError)]
+    public Task<IActionResult> EditDocumentCategoryAsync(
+        [FromBody] EditDocumentCategoryRequest request) =>
+        GetResponseAsync(
+            () => categoryService.EditDocumentCategoryAsync(request),
+            result => new BaseResponse<EditDocumentCategoryResponse> { Result = result });
+
+    /// <summary>
+    /// Удалить категорию
+    /// </summary>
+    [HttpPost("delete")]
+    [ProducesResponseType(typeof(BaseResponse<DeleteDocumentCategoryResponse>), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(BaseResponse<DeleteDocumentCategoryResponse>), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(BaseResponse<DeleteDocumentCategoryResponse>), StatusCodes.Status500InternalServerError)]
+    public Task<IActionResult> DeleteDocumentCategoryAsync(
+        [FromBody] DeleteDocumentCategoryRequest request) =>
+        GetResponseAsync(
+            () => categoryService.DeleteDocumentCategoryAsync(request),
+            result => new BaseResponse<DeleteDocumentCategoryResponse> { Result = result });
 }

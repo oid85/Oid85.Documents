@@ -32,7 +32,7 @@ public static class ServiceCollectionExtensions
                 .EnableServiceProviderCaching(false), poolSize: 32);
 
         services.AddTransient<IDocumentRepository, DocumentRepository>();
-        services.AddTransient<ICategoryRepository, CategoryRepository>();
+        services.AddTransient<IDocumentCategoryRepository, DocumentCategoryRepository>();
         services.AddTransient<IFileRepository, FileRepository>();
     }
 

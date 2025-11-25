@@ -6,9 +6,9 @@ using Oid85.Documents.Infrastructure.Entities;
 namespace Oid85.Documents.Infrastructure.Repositories
 {
     /// <inheritdoc />
-    public class CategoryRepository(
+    public class DocumentCategoryRepository(
         IDbContextFactory<DocumentsContext> contextFactory
-        ) : ICategoryRepository
+        ) : IDocumentCategoryRepository
     {
         /// <inheritdoc />
         public async Task<Guid?> CreateDocumentCategoryAsync(DocumentCategory model)
@@ -25,6 +25,32 @@ namespace Oid85.Documents.Infrastructure.Repositories
             await context.SaveChangesAsync();
 
             return entity.Id;
+        }
+
+        /// <inheritdoc />
+        public async Task<Guid?> DeleteDocumentCategoryAsync(Guid id)
+        {
+            await using var context = await contextFactory.CreateDbContextAsync();
+
+            await context.DocumentCategoryEntities.Where(x => x.Id == id).ExecuteDeleteAsync();
+            await context.SaveChangesAsync();
+
+            return id;
+        }
+
+        /// <inheritdoc />
+        public async Task<Guid?> EditDocumentCategoryAsync(DocumentCategory model)
+        {
+            await using var context = await contextFactory.CreateDbContextAsync();
+
+            await context.DocumentCategoryEntities
+                .Where(x => x.Id == model.Id)
+                .ExecuteUpdateAsync(x => x
+                        .SetProperty(entity => entity.Name, model.Name));
+
+            await context.SaveChangesAsync();
+
+            return model.Id;
         }
 
         /// <inheritdoc />
